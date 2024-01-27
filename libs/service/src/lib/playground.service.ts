@@ -5,7 +5,7 @@ import * as localForage from "localforage";
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-localForage.config({ driver: localForage.INDEXEDDB, name: 'state-management', version: 1.0, size: 4980736, storeName: 'state-management-store' });
+localForage.config({ driver: localForage.LOCALSTORAGE, name: 'playgrounds', version: 1.0, size: 4980736, storeName: 'playgrounds-store' });
 
 @Injectable({
     providedIn: 'root'
