@@ -40,9 +40,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.angular
-
-
 # Nx-Firebase
 .runtimeconfig.json
 **/.emulators/*
@@ -58,3 +55,6 @@ apps/firebase/public
 .env
 
 logs
+
+.angular
+.nx/cache
