@@ -8,7 +8,6 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Reac
     template: `
     <form [formGroup]="fg">
         <div class="row g-3">
-
             <div class="col-12">
               <label class="form-label" for="name">Name</label>
               <input formControlName="name" id="name" type="text" class="form-control" (blur)="onBlur()">
