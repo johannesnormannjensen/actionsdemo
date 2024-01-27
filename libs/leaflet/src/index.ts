@@ -1,1 +1,1 @@
-export * from './lib/leaflet.module';
+export * from './lib';
