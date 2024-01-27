@@ -5,6 +5,7 @@
       @for(playground of playgrounds; track playground.id) {
       <a
         class="list-group-item d-flex list-group-item-action justify-content-between"
+        role="button"
         [class.active]="playground === selectedPlayground"
         (click)="selectPlayground(playground)">
         <div class="d-flex flex-column justify-content-between">
