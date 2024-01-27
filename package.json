@@ -5,24 +5,10 @@
   "scripts": {
     "serve": "npx nx run ui:serve:development",
     "lint": "npx -y nx run-many --all --target=lint",
-    "build:ui": "npx -y nx build ui",
-    "build:firebase": "npx -y nx build firebase",
-    "emulators:start": "npx nx run firebase:firebase emulators:start --only=functions,firestore,auth --import=./exports",
-    "emulators:start:firestore": "npx nx run firebase:firebase emulators:start --only=firestore --import=./exports",
-    "emulators:stop": "npx -y kill-port --port 9099,5001,8080,9000,5000,8085,9199,9299,4000,4400,4500",
-    "emulators:debug": "npx nx run firebase:firebase emulators:start --inspect-functions --only=functions,firestore,auth --import=./exports",
-    "emulators:export": "npx nx run firebase:firebase emulators:export ./exports --force && bash tools/scripts/format-export.sh",
-    "e2e:ui": "firebase emulators:exec --only=functions,firestore,auth --import=./exports 'npx nx e2e ui -- --project chromium'",
-    "e2e-ci:ui": "firebase emulators:exec --only=functions,firestore,auth --import=./exports 'npx nx e2e ui --skip-nx-cache -- --project chromium'",
-    "test:ui": "npx nx run-many --all --t test --projects ui-\\* ui --exclude data",
-    "test-ci:ui": "npx nx run-many --all --t test --projects ui-\\* ui --exclude data --reporters @matteoh2o1999/github-actions-jest-reporter",
-    "test:firebase": "firebase emulators:exec --only=firestore --import=./exports 'npx nx run-many -t test --projects firebase-\\* functions --exclude data'",
-    "test-ci:firebase": "firebase emulators:exec --only=firestore --import=./exports 'npx nx run-many -t test --projects firebase-\\* functions --exclude data --reporters @matteoh2o1999/github-actions-jest-reporter'",
-    "deploy:hosting": "firebase deploy --only hosting",
-    "deploy:functions": "firebase deploy --only functions",
-    "deploy:firestore": "firebase deploy --only firestore:rules",
-    "storybook:ui": "npx -y nx storybook ui",
-    "translate": "npx nx run ui:translate"
+    "build": "npx -y nx build ui",
+    "e2e": "firebase emulators:exec --only=functions,firestore,auth --import=./exports 'npx nx e2e ui -- --project chromium'",
+    "test": "npx nx run-many --all --t test --projects ui-\\* ui --exclude data",
+    "deploy": "firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
