@@ -1,0 +1,26 @@
+name: 'Setup Firebase Tools'
+description: 'Installs the Firebase CLI'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Download firebase-tools script
+      shell: bash
+      run: |
+        curl -sL https://firebase.tools > firebase-tools.sh
+        chmod +x firebase-tools.sh
+
+    - name: Cache firebase-tools
+      id: firebase-tools-cache
+      uses: actions/cache@v4
+      with:
+        path: /usr/local/bin/firebase
+        key: ${{ runner.os }}-firebase-tools-${{ hashFiles('firebase-tools.sh') }}
+    
+    - name: Install firebase-tools
+      if: steps.firebase-tools-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        ./firebase-tools.sh
+        echo "Installed firebase cli version $(firebase --version)"
