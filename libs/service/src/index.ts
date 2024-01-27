@@ -1,1 +1,1 @@
-export * from './lib/service/service.component';
+export * from './lib';
