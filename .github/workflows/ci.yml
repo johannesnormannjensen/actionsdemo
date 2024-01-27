@@ -1,0 +1,58 @@
+name: CI
+concurrency: 
+  group: ci-${{ github.head_ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+env: 
+
+  NODE_VERSION: "18.10"
+  JAVA_VERSION: "11"
+  NPM_REGISTRY_URL: ${{ vars.NPM_REGISTRY_URL }}
+  FORCE_COLOR: 1 # Needed for jest to output colors
+  CI: true
+
+jobs:
+  build-and-test: 
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node v${{ env.NODE_VERSION }}
+        uses: ./.github/composite-actions/setup/node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.NPM_REGISTRY_URL }}
+
+      - name: Install dependencies
+        timeout-minutes: 10
+        run: npm ci ${{ runner.debug == '1' && '--loglevel verbose' || '' }}
+
+      - name: Lint all projects
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Test all ui related projects
+        uses: ./.github/composite-actions/unit-test
+
+      - name: Test all functions related projects
+        run: npm run test-ci:firebase
+      
+      - name: Build UI
+        run: npm run build:ui
+
+      - name: Build firebase
+        run: npm run build:firebase
+
+      - name: Install Playwright Browsers
+        run: npx -y playwright install --with-deps chromium
+
+      - name: Run e2e
+        timeout-minutes: 10
+        run: npm run e2e-ci:ui

@@ -1,0 +1,45 @@
+name: Push deploy
+concurrency: 
+  group: push-deploy-${{ github.head_ref }}
+
+on:
+  push: 
+    branches:
+      - "main"
+
+  workflow_dispatch:
+
+env: 
+
+  NODE_VERSION: "18.10"
+  JAVA_VERSION: "11"
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  NPM_REGISTRY_URL: ${{ vars.NPM_REGISTRY_URL }}
+
+jobs:
+  build-and-test: 
+    runs-on: nestech-firebase-runner-set
+
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node v${{ env.NODE_VERSION }}
+        uses: ./.github/composite-actions/setup/node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.NPM_REGISTRY_URL }}
+      
+      - name: Install dependencies
+        timeout-minutes: 10
+        run: npm ci
+      
+      - name: Deploy ui
+        run: npm run deploy:hosting
+      
+      - name: Deploy functions
+        run: npm run deploy:functions
+      
+      - name: Deploy firestore rules
+        run: npm run deploy:firestore

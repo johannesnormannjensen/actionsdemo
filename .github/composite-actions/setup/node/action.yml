@@ -1,0 +1,31 @@
+name: 'Install Node'
+description: 'Installs a node version and sets the registry url. Falls back to npmjs.org if the registry url is not available'
+inputs:
+  node-version:
+    description: 'Node version'
+    required: true
+  registry-url:
+    description: 'Registry url'
+    required: false
+    default: 'https://registry.npmjs.org'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Check if registry-url is available
+      id: registry
+      shell: bash
+      run: |
+        curl --output /dev/null --silent --head --fail "${{ inputs.registry-url }}"
+        retVal=$?
+        if [ $retVal -eq 0 ]; then
+          echo "url=${{ inputs.registry-url }}" >> $GITHUB_OUTPUT
+        else
+          echo "url=https://registry.npmjs.org" >> $GITHUB_OUTPUT
+        fi
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        registry-url: ${{ steps.registry.outputs.url }}
