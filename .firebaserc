@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "ui"
+    "default": "ngneers-playground"
   },
   "targets": {
   }

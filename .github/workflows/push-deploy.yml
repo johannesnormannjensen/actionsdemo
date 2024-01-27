@@ -27,5 +27,5 @@ jobs:
       - name: Install dependencies
         uses: ./.github/composite-actions/install-dependencies
 
-      - name: Deploy ui
+      - name: Deploy playground-client
         run: npm run deploy
