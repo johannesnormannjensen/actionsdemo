@@ -8,11 +8,11 @@ import { FooterComponent } from './footer/footer.component.js';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  standalone: true,
-  imports: [SidebarComponent, LeafletComponent, FooterComponent],
-  selector: 'ngneers-root',
-  providers: [PlaygroundStore],
-  template: `
+    standalone: true,
+    imports: [SidebarComponent, LeafletComponent, FooterComponent],
+    selector: 'ngneers-root',
+    providers: [PlaygroundStore],
+    template: `
   <main class="vw-100 vh-100">
     <leaflet-map [center]="center()" [markers]="markers()"/>
   </main>
@@ -25,43 +25,44 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   }`,
 })
 export class AppComponent {
-  playgrounds: Signal<Playground[]>;
-  playground = this.store.playground;
-  center: Signal<Center>;
-  markers: Signal<Marker[] | undefined>;
+    playgrounds: Signal<Playground[]>;
+    playground = this.store.playground;
+    center: Signal<Center>;
+    markers: Signal<Marker[] | undefined>;
 
-  constructor(
-    private store: PlaygroundStore,
-    private modal: NgbModal,
-    private injector: Injector,
-    private locationService: LocationService,
-  ) {
-    this.store.loadPlaygrounds();
+    constructor(
+        private store: PlaygroundStore,
+        private modal: NgbModal,
+        private injector: Injector,
+        private locationService: LocationService,
+    ) {
 
-    this.markers = computed(() => {
-      const playground = this.store.playground();
-      return [
-        this.locationService.location(),
-        playground ? ({ ...playground.position, message: playground.name }) : undefined,
-      ];
-    });
+        this.store.loadPlaygrounds();
 
-    const getDistance = locationService.getDistance;
-    this.playgrounds = computed(() => {
-      const location = this.locationService.location();
-      return location
-        ? this.store.playgrounds().sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
-        : this.store.playgrounds();
-    });
-    this.center = computed(() => locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
-  }
+        this.markers = computed(() => {
+            const playground = this.store.playground();
+            return [
+                this.locationService.location(),
+                playground ? ({ ...playground.position, message: playground.name }) : undefined,
+            ];
+        });
 
-  edit(playground: Playground) {
-    this.setPlayground(playground);
-    this.modal.open(EditPlaygroundModalComponent, { injector: this.injector });
-  }
+        const getDistance = locationService.getDistance;
+        this.playgrounds = computed(() => {
+            const location = this.locationService.location();
+            return location
+                ? this.store.playgrounds().sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+                : this.store.playgrounds();
+        });
+        this.center = computed(() => locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
+    }
 
-  setPlayground({ id }: Playground) {
-    this.store.selectedId(id);
-  }
+    edit(playground: Playground) {
+        this.setPlayground(playground);
+        this.modal.open(EditPlaygroundModalComponent, { injector: this.injector });
+    }
+
+    setPlayground({ id }: Playground) {
+        this.store.selectedId(id);
+    }
 }
