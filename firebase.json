@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "actions-demo",
+    "site": "ngneers-playground",
     "predeploy": "npx nx build ui",
     "public": "dist/ui",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],

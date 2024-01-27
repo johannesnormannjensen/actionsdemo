@@ -8,24 +8,15 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "apps/firebase/public",
         "index": "apps/ui/src/index.html",
         "main": "apps/ui/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/ui/tsconfig.app.json",
-        "assets": [
-          "apps/ui/src/favicon.ico",
-          "apps/ui/src/assets"
-        ],
-        "styles": [
-          "apps/ui/src/styles.scss"
-        ],
+        "assets": ["apps/ui/src/favicon.ico", "apps/ui/src/assets"],
+        "styles": ["apps/ui/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -86,40 +77,23 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "ui:build:production"
+          "buildTarget": "ui:build:production"
         },
         "development": {
-          "browserTarget": "ui:build:development"
+          "buildTarget": "ui:build:development"
         }
       },
       "defaultConfiguration": "development"
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "apps/ui/**/*.ts",
-          "apps/ui/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/ui/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "apps/ui/jest.config.ts"
       }
     },
     "serve-static": {
@@ -130,9 +104,7 @@
     },
     "e2e": {
       "executor": "@nx/playwright:playwright",
-      "outputs": [
-        "{workspaceRoot}/dist/.playwright/apps/ui"
-      ],
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/ui"],
       "options": {
         "config": "apps/ui/playwright.config.ts"
       }
@@ -153,9 +125,7 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": [
-        "{options.outputDir}"
-      ],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/ngneers",
         "configDir": "apps/ui/.storybook",
