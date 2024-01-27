@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@ngneers/data": ["libs/data/src/index.ts"],
+      "@ngneers/leaflet": ["libs/leaflet/src/index.ts"],
       "@ngneers/service": ["libs/service/src/index.ts"]
     }
   },

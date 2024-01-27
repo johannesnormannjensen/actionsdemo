@@ -1,0 +1,47 @@
+{
+  "name": "leaflet",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/leaflet/src",
+  "prefix": "leaflet",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/leaflet/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/leaflet/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/leaflet/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/leaflet/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/leaflet/**/*.ts", "libs/leaflet/**/*.html", "libs/leaflet/package.json"]
+      }
+    }
+  }
+}
