@@ -1,8 +1,8 @@
 import { Injectable, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Coordinate } from '@ngneers/data';
 import { Observable, noop } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { Coordinate } from '../model';
 
 @Injectable({
   providedIn: 'root'

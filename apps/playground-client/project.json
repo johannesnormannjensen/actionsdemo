@@ -16,6 +16,9 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/playground-client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "stylePreprocessorOptions": {
+          "includePaths": [""]
+        },
         "assets": ["apps/playground-client/src/favicon.ico", "apps/playground-client/src/assets"],
         "styles": ["apps/playground-client/src/styles.scss"],
         "scripts": []
