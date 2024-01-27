@@ -22,6 +22,8 @@ export default defineConfig({
     baseURL,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    permissions: ['geolocation'],
+    geolocation: { latitude: 55.669599877562, longitude: 12.588571683898572 },
   },
   /* Run your local dev server before starting the tests */
   webServer: {
