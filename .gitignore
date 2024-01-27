@@ -4,7 +4,7 @@
 dist
 tmp
 /out-tsc
-apps/ui/src/assets/i18n/*.json
+apps/playground-client/src/assets/i18n/*.json
 
 # dependencies
 node_modules
@@ -48,7 +48,6 @@ database-debug.log
 firebase-debug.log
 firestore-debug.log
 pubsub-debug.log
-ui-debug.log
 
 # Firebase Public folder
 apps/firebase/public

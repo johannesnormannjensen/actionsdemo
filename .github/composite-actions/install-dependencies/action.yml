@@ -1,0 +1,22 @@
+name: 'Install Dependencies'
+description: 'Install dependencies for the project'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Cache dependencies
+      id: dependencies-cache
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('package-lock.json') }}
+    
+    - name: Install dependencies
+      if: steps.dependencies-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: npm ci
+
+    - name: Install nx
+      shell: bash
+      run: npm install -g nx

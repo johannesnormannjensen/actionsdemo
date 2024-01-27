@@ -1,7 +1,6 @@
 {
   "hosting": {
     "site": "ngneers-playground",
-    "predeploy": "npm run build",
     "public": "dist/apps/playground-client/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
