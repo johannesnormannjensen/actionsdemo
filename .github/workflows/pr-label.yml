@@ -14,14 +14,14 @@ jobs:
             const title = context.payload.pull_request.title;
             const match = title.match(/^(\w+)(\([a-z][- a-zA-Z0-9]*[a-zA-Z0-9]\))?: (.+)$/);
             if (!match) {
-              core.setFailed(`Pull Request title '${title}' does not follow contributing rules! \nGo to https://github.com/dotnestech/nestext/wiki/Contributing for contributing rules`);
+              core.setFailed(`Pull Request title '${title}' does not follow contributing rules! \nGo to https://github.com/dotnestech/ngneers/wiki/Contributing for contributing rules`);
               return;
             }
             const commitType = match[1];
             const scope = match[2];
             const summary = match[3];
             if (!summary.match(/\w+/)){
-              core.setFailed(`Pull Request summary '${summary}' should contain at least one word. \nGo to https://github.com/dotnestech/nestext/wiki/Contributing for contributing rules`);
+              core.setFailed(`Pull Request summary '${summary}' should contain at least one word. \nGo to https://github.com/dotnestech/ngneers/wiki/Contributing for contributing rules`);
               return;
             }
             const owner = context.repo.owner;
@@ -58,7 +58,7 @@ jobs:
             if(titleLabel) {
               labels.push(titleLabel)
             } else {
-              core.setFailed(`Pull Request title '${title}' uses an unknown commitType '${commitType}'! \nGo to https://github.com/dotnestech/nestext/wiki/Contributing for contributing rules`);
+              core.setFailed(`Pull Request title '${title}' uses an unknown commitType '${commitType}'! \nGo to https://github.com/dotnestech/ngneers/wiki/Contributing for contributing rules`);
               return;
             }
 

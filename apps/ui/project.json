@@ -2,7 +2,7 @@
   "name": "ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "nestext",
+  "prefix": "ngneers",
   "sourceRoot": "apps/ui/src",
   "tags": [],
   "targets": {
@@ -58,7 +58,7 @@
           "sourceMap": true,
           "namedChunks": true
         },
-        "nestext-dev": {
+        "ngneers-dev": {
           "budgets": [
             {
               "type": "initial",
@@ -75,7 +75,7 @@
           "fileReplacements": [
             {
               "replace": "libs/ui/environment/src/lib/environment.ts",
-              "with": "libs/ui/environment/src/lib/environment.nestext-dev.ts"
+              "with": "libs/ui/environment/src/lib/environment.ngneers-dev.ts"
             }
           ]
         }
@@ -157,7 +157,7 @@
         "{options.outputDir}"
       ],
       "options": {
-        "outputDir": "dist/storybook/nestext",
+        "outputDir": "dist/storybook/ngneers",
         "configDir": "apps/ui/.storybook",
         "browserTarget": "ui:build",
         "compodoc": false
