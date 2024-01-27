@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "npx nx run ui:serve:development",
+    "serve": "npx -y nx serve playground-client",
     "lint": "npx -y nx run-many --all --target=lint",
-    "build": "npx -y nx build ui",
-    "e2e": "firebase emulators:exec --only=functions,firestore,auth --import=./exports 'npx nx e2e ui -- --project chromium'",
-    "test": "npx nx run-many --all --t test --projects ui-\\* ui --exclude data",
+    "build": "npx -y nx build playground-client",
+    "e2e": "npx nx e2e playground-client-e2e",
+    "test": "npx nx run-many --all --t test",
     "deploy": "firebase deploy --only hosting"
   },
   "private": true,
