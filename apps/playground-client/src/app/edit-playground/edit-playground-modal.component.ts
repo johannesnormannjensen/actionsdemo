@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditPlaygroundControlComponent } from './edit-playground-control.component';
 import { Playground } from '@ngneers/data';
 import { PlaygroundStore } from '@ngneers/service';
+import { EditPlaygroundControlComponent } from './edit-playground-control.component';
 
 @Component({
   selector: 'ngneers-edit-playground-modal',
@@ -16,7 +16,7 @@ import { PlaygroundStore } from '@ngneers/service';
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
       </div>
       <div class="modal-body">
-        <loop-edit-playground-control [formControl]="editControl"/>
+        <ngneers-edit-playground-control [formControl]="editControl"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Luk</button>
