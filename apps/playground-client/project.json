@@ -20,9 +20,11 @@
           "includePaths": [""]
         },
         "assets": ["apps/playground-client/src/favicon.ico", "apps/playground-client/src/assets"],
-        "styles": ["apps/playground-client/src/styles.scss"],
-        "scripts": []
-      },
+        "styles": ["apps/playground-client/src/styles.scss", "node_modules/leaflet/dist/leaflet.css"],
+        "scripts": [
+        "node_modules/leaflet/dist/leaflet.js"
+        ]
+    },
       "configurations": {
         "production": {
           "budgets": [

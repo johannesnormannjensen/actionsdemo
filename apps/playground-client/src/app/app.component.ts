@@ -4,13 +4,14 @@ import { Playground } from '@ngneers/data';
 import { Center, LeafletComponent, Marker } from '@ngneers/leaflet';
 import { LocationService, PlaygroundStore } from '@ngneers/service';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component.js';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   standalone: true,
   imports: [SidebarComponent, LeafletComponent, FooterComponent],
   selector: 'ngneers-root',
+  providers: [PlaygroundStore],
   template: `
   <main class="vw-100 vh-100">
     <leaflet-map [center]="center()" [markers]="markers()"/>
