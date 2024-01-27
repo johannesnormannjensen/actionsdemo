@@ -1,63 +1,60 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Playground } from '@ngneers/data';
-import * as localForage from "localforage";
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { StorageService } from './storage.service';
 
-localForage.config({ driver: localForage.LOCALSTORAGE, name: 'playgrounds', version: 1.0, size: 4980736, storeName: 'playgrounds-store' });
-
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class PlaygroundService {
 
-    constructor(private http: HttpClient) {
-    }
 
-    list(): Observable<Playground[]> {
-        return from(localForage.getItem<Playground[]>('playgrounds')).pipe(
-            switchMap(playgrounds => playgrounds ? of(playgrounds) : this.http.get<Playground[]>('assets/copenhagen.json')),
-            switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-                map(() => playgrounds)
-            )),
-        );
-    }
+  constructor(private http: HttpClient, private storageService: StorageService) {
+  }
 
-    get(id: string): Observable<Playground | undefined> {
-        return this.list().pipe(
-            map(playgrounds => playgrounds.find(playground => playground.id === id))
-        );
-    }
+  list(): Observable<Playground[]> {
+    return from(this.storageService.get<Playground[]>('playgrounds')).pipe(
+      switchMap(playgrounds => playgrounds ? of(playgrounds) : this.http.get<Playground[]>('assets/copenhagen.json')),
+      switchMap(playgrounds => from(this.storageService.set('playgrounds', playgrounds)).pipe(
+        map(() => playgrounds)
+      )),
+    );
+  }
 
-    create(playground: Playground): Observable<Playground> {
-        return this.list().pipe(
-            map(playgrounds => [...playgrounds, playground]),
-            switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-                map(() => playgrounds)
-            )),
-            map(playgrounds => playgrounds.find(p => p.id === playground.id)!)
-        );
-    }
+  get(id: string): Observable<Playground | undefined> {
+    return this.list().pipe(
+      map(playgrounds => playgrounds.find(playground => playground.id === id))
+    );
+  }
 
-    update(id: string, playground: Partial<Playground>): Observable<Playground> {
-        return this.list().pipe(
-            map(playgrounds => playgrounds.map(p => p.id === id ? { ...p, ...playground } : p)),
-            switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-                map(() => playgrounds)
-            )),
-            map(playgrounds => playgrounds.find(p => p.id === id)!)
-        );
-    }
+  create(playground: Playground): Observable<Playground> {
+    return this.list().pipe(
+      map(playgrounds => [...playgrounds, playground]),
+      switchMap(playgrounds => from(this.storageService.set('playgrounds', playgrounds)).pipe(
+        map(() => playgrounds)
+      )),
+      map(playgrounds => playgrounds.find(p => p.id === playground.id)!)
+    );
+  }
 
-    delete(id: string): Observable<void> {
-        return this.list().pipe(
-            map(playgrounds => playgrounds.filter(p => p.id !== id)),
-            switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-                map(() => playgrounds)
-            )),
-            map(() => undefined)
-        );
-    }
+  update(id: string, playground: Partial<Playground>): Observable<Playground> {
+    return this.list().pipe(
+      map(playgrounds => playgrounds.map(p => p.id === id ? { ...p, ...playground } : p)),
+      switchMap(playgrounds => from(this.storageService.set('playgrounds', playgrounds)).pipe(
+        map(() => playgrounds)
+      )),
+      map(playgrounds => playgrounds.find(p => p.id === id)!)
+    );
+  }
+
+  delete(id: string): Observable<void> {
+    return this.list().pipe(
+      map(playgrounds => playgrounds.filter(p => p.id !== id)),
+      switchMap(playgrounds => from(this.storageService.set('playgrounds', playgrounds)).pipe(
+        map(() => playgrounds)
+      )),
+      map(() => undefined)
+    );
+  }
 
 }
