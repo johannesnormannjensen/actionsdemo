@@ -20,18 +20,20 @@
     "@angular/platform-browser": "17.0.9",
     "@angular/platform-browser-dynamic": "17.0.9",
     "@angular/router": "17.0.9",
-    "@fortawesome/angular-fontawesome": "^0.13.0",
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-brands-svg-icons": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@ng-bootstrap/ng-bootstrap": "^15.0.1",
+    "@fortawesome/angular-fontawesome": "^0.14.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "leaflet": "^1.7.1",
+    "localforage": "^1.10.0",
     "@ngneat/until-destroy": "^10.0.0",
     "@nx/angular": "17.2.8",
     "@nx/plugin": "17.2.8",
     "@popperjs/core": "^2.11.6",
     "@swc/helpers": "0.5.3",
-    "bootstrap": "~5.2.3",
+    "bootstrap": "^5.3.2",
     "luxon": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -99,15 +101,9 @@
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2"
-  },
-  "overrides": {
-    "@ngworker/lumberjack": {
-      "@angular/core": "$@angular/core",
-      "@angular/common": "$@angular/common",
-      "@angular/platform-browser": "$@angular/platform-browser",
-      "rxjs": "$rxjs"
-    }
+    "typescript": "5.2.2",
+    "@types/leaflet": "^1.7.0"
+
   },
   "nx": {
     "includedScripts": []
