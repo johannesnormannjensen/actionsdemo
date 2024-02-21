@@ -7,6 +7,7 @@
     "lint": "nx run-many --all --target=lint",
     "build": "nx build playground-client",
     "e2e": "nx e2e playground-client-e2e",
+    "e2e:ui": "nx e2e playground-client-e2e --ui",
     "test": "nx run-many --all --t test",
     "deploy": "firebase deploy --only hosting"
   },
