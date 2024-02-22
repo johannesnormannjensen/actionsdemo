@@ -1,6 +1,6 @@
 name: Pull Request - CI
 concurrency: 
-  group: push-deploy-${{ github.head_ref }}
+  group: pull-request-ci-${{ github.head_ref }}
 
 on:
   pull_request:
