@@ -48,7 +48,6 @@ export class AppComponent {
             ];
         });
 
-        const getDistance = locationService.getDistance;
         this.playgrounds = computed(() => {
             const location = this.locationService.location();
             return location

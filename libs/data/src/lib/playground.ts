@@ -1,4 +1,3 @@
-import { PlaygroundSorter } from '@ngneers/service';
 import { Coordinate } from './coordinate';
 
 export interface Playground {
@@ -8,5 +7,3 @@ export interface Playground {
     description?: string;
     position: Coordinate;
 }
-
-export const sortByName = PlaygroundSorter.byName;
