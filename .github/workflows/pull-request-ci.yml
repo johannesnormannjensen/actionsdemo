@@ -29,5 +29,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Setup Playwright
+        run: npx playwright install --with-deps
+
       - name: E2e
         run: npm run e2e
