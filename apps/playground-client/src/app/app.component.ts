@@ -2,7 +2,8 @@ import { Component, computed, Injector, Signal } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '@ngneers/data';
 import { Center, LeafletComponent, Marker } from '@ngneers/leaflet';
-import { LocationService, PlaygroundStore } from '@ngneers/service';
+import { LocationService, PlaygroundSorter, PlaygroundStore } from '@ngneers/service';
+
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component.js';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -51,7 +52,7 @@ export class AppComponent {
         this.playgrounds = computed(() => {
             const location = this.locationService.location();
             return location
-                ? this.store.playgrounds().sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+                ? this.store.playgrounds().sort(PlaygroundSorter.byDistance(location))
                 : this.store.playgrounds();
         });
         this.center = computed(() => locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
