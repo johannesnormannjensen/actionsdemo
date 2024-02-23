@@ -41,7 +41,7 @@ export class EditPlaygroundModalComponent implements OnInit {
   }
 
   save() {
-    if (this.editControl.invalid) {
+    if (this.editControl.valid) {
       this.store.updatePlayground({ ...this.playground, ...this.editControl.value });
       this.modal.close();
     }
